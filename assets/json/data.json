@@ -1,0 +1,30 @@
+{
+  "articles" : [
+    {
+      "image": "assets/images/cms-img1.jpg",
+      "titre": "Vie du réseau",
+      "description": "Retrouvez ici tout ce qui concerne la vie du réseau!",
+      "likes": 12
+    },
+    {
+      "image": "assets/images/cms-img2.png",
+      "titre": "Métier",
+      "description": "Tout ce qui tourne autour du métier de conseiller immobilier"
+    },
+    {
+      "image": "assets/images/cms-img3.jpg",
+      "titre": "Filières",
+      "description": "Neuf / Location et Gestion / Commerce / Viager"
+    },
+    {
+      "image": "assets/images/cms-img4.jpg",
+      "titre": "Digitre Academie",
+      "description": "Présentation"
+    },
+    {
+      "image": "assets/images/cms-img5.jpg",
+      "titre": "Diffusion",
+      "description": "Tous les conseils pour une diffusion parfaite de vos biens"
+    }
+  ]
+}

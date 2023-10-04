@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_dr/bloc/estate/estate_cubit.dart';
 import 'package:test_dr/estate_card.dart';
+import 'package:test_dr/repository/estate_repository.dart';
 
 class DetailPage extends StatefulWidget {
   final String name;
@@ -18,7 +19,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
-    _estateCubit = EstateCubit()..loadEstates();
+    _estateCubit = EstateCubit(RepositoryProvider.of<EstateRepository>(context))..loadEstates();
   }
 
   @override
@@ -45,7 +46,9 @@ class _DetailPageState extends State<DetailPage> {
               return switch (state) {
                 EstateInitial() => SizedBox(),
                 EstateLoading() => Center(child: CircularProgressIndicator()),
-                EstateError() => Center(child: Text('Error')),
+                EstateError() => Center(child: Text('Error', style: Theme.of(context).textTheme.headlineSmall)),
+                EstateLoaded(:final estates) when estates.isEmpty =>
+                  Center(child: Text('No estates', style: Theme.of(context).textTheme.headlineSmall)),
                 EstateLoaded(:final estates) => GridView.builder(
                     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 400,

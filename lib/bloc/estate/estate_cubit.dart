@@ -1,23 +1,23 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 import 'package:test_dr/model/estate.model.dart';
-import 'package:test_it/test_it.dart';
+import 'package:test_dr/repository/estate_repository.dart';
 
 part 'estate_state.dart';
 
 class EstateCubit extends Cubit<EstateState> {
-  final r = Random();
+  final EstateRepository repository;
 
-  EstateCubit() : super(EstateInitial());
+  EstateCubit(this.repository) : super(EstateInitial());
 
   void loadEstates() async {
     emit(EstateLoading());
-    final a = Awesome();
-    print(a.isAwesome);
-    await Future.delayed(Duration(milliseconds: 2000));
-    emit(EstateLoaded(List.generate(
-        r.nextInt(5) + 1, (index) => Estate(title: 'Propriété $index', description: 'Description $index'))));
+    try {
+      final result = await repository.getEstates();
+      emit(EstateLoaded(result));
+    } catch (e, s) {
+      emit(EstateError(e.toString()));
+    }
   }
 }

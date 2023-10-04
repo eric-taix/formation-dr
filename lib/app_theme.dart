@@ -45,6 +45,11 @@ final jeremyTheme = defaultTheme.copyWith(
       color: Colors.white,
     ),
     textTheme: const TextTheme(
+      headlineSmall: TextStyle(
+        fontSize: 19,
+        fontWeight: FontWeight.w500,
+        color: Colors.black,
+      ),
       bodyMedium: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w500,
