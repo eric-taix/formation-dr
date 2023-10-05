@@ -30,11 +30,11 @@ class SplitView extends StatelessWidget {
         ),
         body: Row(
           children: [
-            SizedBox(
+            /*SizedBox(
               width: menuWidth,
               child: menu,
             ),
-            const VerticalDivider(),
+            const VerticalDivider(),*/
             Expanded(child: content),
           ],
         ),

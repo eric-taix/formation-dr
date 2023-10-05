@@ -60,6 +60,11 @@ final jeremyTheme = defaultTheme.copyWith(
         fontWeight: FontWeight.w500,
         color: Colors.grey,
       ),
+      labelSmall: TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w500,
+        color: Colors.grey,
+      ),
     ));
 
 extension ColorExtension on Color {

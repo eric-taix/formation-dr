@@ -6,12 +6,18 @@ import 'package:test_dr/data/estate_data_provider_http.dart';
 import 'package:test_dr/detail_page.dart';
 import 'package:test_dr/menu.dart';
 import 'package:test_dr/page_model.dart';
+import 'package:test_dr/pages/dashboard.dart';
 import 'package:test_dr/parameters.dart';
 import 'package:test_dr/repository/estate_repository.dart';
 import 'package:test_dr/repository/estate_repository_impl.dart';
 import 'package:test_dr/split_view.dart';
 
 final pages = [
+  PageModel(
+      title: 'Dashboard',
+      builder: (context) {
+        return Dashboard(key: ValueKey('dashboard'));
+      }),
   PageModel(
       title: 'Users',
       builder: (context) {
@@ -53,7 +59,7 @@ class HomePage extends StatelessWidget {
                       onPageSelected: (page) => _selectedPageNotifier.value = page,
                     ),
                     content: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
                       child: selectedPage.builder(context),
                     ),
                   );
