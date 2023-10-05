@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 part 'theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit() : super(ThemeDark());
+  ThemeCubit() : super(ThemeLight());
 
   switchTheme() {
     final currentState = state;

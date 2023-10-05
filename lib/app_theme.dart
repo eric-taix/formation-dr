@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+final defaultFont = GoogleFonts.roboto();
 
 final defaultTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
   useMaterial3: true,
+  fontFamily: defaultFont.fontFamily,
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.deepPurple,
     titleTextStyle: TextStyle(color: Colors.white),
@@ -33,42 +37,50 @@ final defaultTheme = ThemeData(
 );
 
 final jeremyTheme = defaultTheme.copyWith(
-    colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue).copyWith(
+      primaryContainer: Colors.red,
+      inversePrimary: Color(0xFFF9FAFC),
+    ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.blue,
-      titleTextStyle: TextStyle(color: Colors.white),
+      backgroundColor: Colors.white,
+      titleTextStyle: TextStyle(color: Colors.black),
     ),
     cardTheme: CardTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
       ),
-      color: Colors.white,
+      color: Color(0xFFF1F3F8),
     ),
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
       headlineSmall: TextStyle(
         fontSize: 19,
         fontWeight: FontWeight.w500,
         color: Colors.black,
+        fontFamily: defaultFont.fontFamily,
       ),
       bodyLarge: TextStyle(
         fontSize: 24,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w900,
         color: Colors.black,
+        fontFamily: defaultFont.fontFamily,
       ),
       bodyMedium: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w500,
-        color: Colors.white,
+        color: Colors.black,
+        fontFamily: defaultFont.fontFamily,
       ),
       bodySmall: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: Colors.grey,
+        fontFamily: defaultFont.fontFamily,
       ),
       labelSmall: TextStyle(
         fontSize: 10,
         fontWeight: FontWeight.w500,
         color: Colors.grey,
+        fontFamily: defaultFont.fontFamily,
       ),
     ));
 
