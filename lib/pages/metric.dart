@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Metric extends StatelessWidget {
-  const Metric({super.key});
+  const Metric({super.key, required this.title, required this.subTitle, required this.icon});
+
+  final String title;
+  final String subTitle;
+  final Widget icon;
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +15,14 @@ class Metric extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 4, right: 4),
-            child: Icon(Icons.shopping_bag_outlined, size: 20),
+            padding: const EdgeInsets.only(top: 6, right: 4),
+            child: icon,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('2400', style: Theme.of(context).textTheme.bodyLarge),
-              Text('Stackholders', style: Theme.of(context).textTheme.labelSmall)
+              Text(title, style: Theme.of(context).textTheme.bodyLarge),
+              Text(subTitle, style: Theme.of(context).textTheme.labelSmall)
             ],
           )
         ],
