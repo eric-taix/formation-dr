@@ -17,7 +17,11 @@ class SplitView extends StatelessWidget {
         appBar: AppBar(
           title: AppBarTitle(),
         ),
-        body: content,
+        body: Row(
+          children: [
+            Expanded(child: content),
+          ],
+        ),
         drawer: SizedBox(
           width: menuWidth,
           child: Drawer(child: menu),
