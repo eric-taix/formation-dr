@@ -19,7 +19,7 @@ class MetricsCubit extends Cubit<MetricsState> {
             cash: 300.000,
             stake: 9.2,
             draft: 56.34,
-            revenueModel: RevenueModel(percent: 0.3, value: 1000),
+            revenueModel: RevenueModel(percent: 0.3, value: 21.3),
           ),
         ),
       );

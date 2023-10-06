@@ -2,7 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_dr/bloc/metrics/metrics_cubit.dart';
 
+import '../model/metrics.model.dart';
 import 'metric.dart';
+import 'overall_progress.dart';
+
+typedef ValueExtractor = double Function(MetricsModel);
+
+final metrics = <({Widget icon, String subtitle, ValueExtractor valueExtractor})>[
+  (
+    icon: const Icon(Icons.dashboard_outlined),
+    subtitle: 'Fully diluted shares',
+    valueExtractor: (metricsModel) => metricsModel.shares
+  ),
+  (
+    icon: const Icon(Icons.pie_chart_outline_sharp),
+    subtitle: 'Total cash raised',
+    valueExtractor: (metricsModel) => metricsModel.cash
+  ),
+  (
+    icon: const Icon(Icons.shopping_bag_outlined),
+    subtitle: 'Stakeholders',
+    valueExtractor: (metricsModel) => metricsModel.stake
+  ),
+  (
+    icon: const Icon(Icons.lock_outline_rounded),
+    subtitle: 'In draft',
+    valueExtractor: (metricsModel) => metricsModel.draft
+  ),
+];
 
 class Metrics extends StatelessWidget {
   const Metrics({super.key});
@@ -13,16 +40,47 @@ class Metrics extends StatelessWidget {
       create: (context) => MetricsCubit()..loadMetrics(),
       child: BlocBuilder<MetricsCubit, MetricsState>(
         builder: (context, state) {
-          return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Metric(
-                icon: Icon(Icons.dashboard_outlined),
-                title: TitleLoaded(value: '1,000,000'),
-                subTitle: 'Fully diluted shares'),
-            //Metric(icon: Icon(Icons.pie_chart_outline_sharp), title: '\$1,245,000', subTitle: 'Total cash raised'),
-            //Metric(icon: Icon(Icons.shopping_bag_outlined), title: '2400', subTitle: 'Stakeholders'),
-            //Metric(icon: Icon(Icons.lock_outline_rounded), title: '\$4,500', subTitle: 'In draft'),
-            //OverallProgress(title: '\$21.3k'),
-          ]);
+          return switch (state) {
+            MetricsInitial() => const SizedBox(),
+            MetricsLoading() || MetricsLoaded() => Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ...metrics.map(
+                    (metric) {
+                      return Metric(
+                        icon: metric.icon,
+                        title: switch (state) {
+                          // We must handle these cases due to Dart
+                          MetricsInitial() || MetricsLoading() || MetricsError() => TitleLoading(),
+                          MetricsLoaded(:final metricsModel) => TitleLoaded(
+                              value: metric.valueExtractor(metricsModel).toString(),
+                            ),
+                        },
+                        subTitle: metric.subtitle,
+                      );
+                    },
+                  ).toList(),
+                  OverallProgress(
+                    progressValue: switch (state) {
+                      MetricsInitial() || MetricsLoading() || MetricsError() => LoadingProgress(),
+                      MetricsLoaded(
+                        metricsModel: MetricsModel(
+                          revenueModel: RevenueModel(:final percent, :final value),
+                        ),
+                      ) =>
+                        LoadedProgress(
+                          progress: percent,
+                          title: value,
+                        )
+                    },
+                  )
+                ],
+              ),
+            MetricsError() => const Center(
+                child: Text('Not found'),
+              ),
+          };
         },
       ),
     );

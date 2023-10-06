@@ -32,18 +32,21 @@ class Metric extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              switch (title) {
-                TitleLoading() => Shimmer(
-                    enabled: true,
-                    color: Colors.grey,
-                    colorOpacity: 1,
-                    child: Opacity(
-                      opacity: 0,
-                      child: Text('1234567', style: Theme.of(context).textTheme.bodyLarge),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: switch (title) {
+                  TitleLoading() => Shimmer(
+                      enabled: true,
+                      color: Colors.grey,
+                      colorOpacity: 1,
+                      child: Opacity(
+                        opacity: 0,
+                        child: Text('1234567', style: Theme.of(context).textTheme.bodyLarge),
+                      ),
                     ),
-                  ),
-                TitleLoaded(value: final title) => Text(title, style: Theme.of(context).textTheme.bodyLarge),
-              },
+                  TitleLoaded(value: final title) => Text(title, style: Theme.of(context).textTheme.bodyLarge),
+                },
+              ),
               Text(subTitle, style: Theme.of(context).textTheme.labelSmall)
             ],
           )

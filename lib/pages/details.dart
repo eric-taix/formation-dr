@@ -9,7 +9,10 @@ class Details extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const Metrics(),
+          SizedBox(
+            height: 75,
+            child: const Metrics(),
+          ),
           const Placeholder(),
           const Placeholder(),
         ],
