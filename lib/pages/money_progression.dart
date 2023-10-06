@@ -18,7 +18,7 @@ class MoneyProgression extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title),
+                Expanded(child: Text(title, style: TextStyle(overflow: TextOverflow.ellipsis))),
                 Text(total),
               ],
             ),
